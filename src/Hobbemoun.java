@@ -65,7 +65,7 @@ public class Hobbemoun implements Comparable<Hobbemoun> {
 
 
   /**
-   * This constructor may be used for testing purposes (particuarly the compareTo method). It
+   * This constructor may be used for testing purposes (particularly the compareTo method). It
    * creates a Hobbemoun with the given name, and the first and second IDs set to 0. The primary and
    * secondary types are set to the given primary and secondary types, respectively.
    *
@@ -115,7 +115,7 @@ public class Hobbemoun implements Comparable<Hobbemoun> {
   }
 
   /**
-   * Gets the second ID of thid Hobbemoun
+   * Gets the second ID of this Hobbemoun
    *
    * @return the second ID of the Hobbemoun
    */
@@ -147,7 +147,7 @@ public class Hobbemoun implements Comparable<Hobbemoun> {
    * 1) Compare the primary type of the Hobbemoun. If the primary types are different, the Hobbemoun
    * with the higher value primary type is considered greater.
    *
-   * 2) If the primary types are the same and both Hobbemoun have a secondardy type, compare the
+   * 2) If the primary types are the same and both Hobbemoun have a secondary type, compare the
    * secondary types. If the secondary types are different, the Hobbemoun with the higher value
    * secondary type is considered greater. If either Hobbemoun has no secondary type, skip this
    * step.
@@ -162,9 +162,32 @@ public class Hobbemoun implements Comparable<Hobbemoun> {
    * @return a negative int if this Hobbemoun is less than other, a positive int if this Hobbemoun
    *         is greater than other, or 0 if this and the other Hobbemoun are equal.
    */
+  @Override
   public int compareTo(Hobbemoun otherHobbemoun) {
-    // TODO: Implement the compareTo method and add @Override annotation above the method signature
-    return -1;
+    // Compare primary types
+    HobbemounType thisPrimaryType = this.PRIMARY_TYPE;
+    HobbemounType otherPrimaryType = otherHobbemoun.getPrimaryType();
+    // Compare primary types
+    int primaryTypeComparison = thisPrimaryType.compareTo(otherPrimaryType);
+    if (primaryTypeComparison != 0) {
+      return primaryTypeComparison;
+    }
+    // Compare secondary types if both have one
+    HobbemounType thisSecondaryType = this.SECONDARY_TYPE;
+    HobbemounType otherSecondaryType = otherHobbemoun.getSecondaryType();
+    if (thisSecondaryType != null && otherSecondaryType != null) {
+      int secondaryTypeComparison = thisSecondaryType.compareTo(otherSecondaryType);
+      if (secondaryTypeComparison != 0) {
+        return secondaryTypeComparison;
+      }
+    }
+    // Compare names
+    int nameComparison = this.NAME.compareTo(otherHobbemoun.getName());
+    if (nameComparison != 0) {
+      return nameComparison;
+    }
+    // If all comparisons are equal, return 0 
+    return 0;
   }
 
   /**

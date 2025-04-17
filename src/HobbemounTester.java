@@ -12,8 +12,28 @@ public class HobbemounTester {
    * @return true if test passes, false otherwise
    */
   public static boolean testCompareToByType() {
-    return false; // TODO: implement this test
-
+    // Create two Hobbemouns with different primary types
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      Hobbemoun h1 = new Hobbemoun(type1, null, "Zapchu");
+      Hobbemoun h2 = new Hobbemoun(type2, null, "Lapchu");
+      if ((h1.compareTo(h2) > 1)){
+        return false;
+      }
+    }
+    // Create two Hobbemouns with different secondary types
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      HobbemounType type3 = HobbemounType.GROUND;
+      Hobbemoun h1 = new Hobbemoun(type1, type3, "Zapchu");
+      Hobbemoun h2 = new Hobbemoun(type1, type2, "Lapchu");
+      if ((h1.compareTo(h2) < 0)){
+        return false;
+      }
+    }
+    return true; 
   }
 
   /**
@@ -22,13 +42,66 @@ public class HobbemounTester {
    * @return true if test passes, false otherwise
    */
   public static boolean testCompareToByName() {
-    return false; // TODO: implement this test
-
+    // Create two Hobbemouns with different names
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      Hobbemoun h1 = new Hobbemoun(type1, type2, "Zapchu");
+      Hobbemoun h2 = new Hobbemoun(type1, type2, "Lapchu");
+      if ((h1.compareTo(h2) < 0)){
+        return false;
+      }
+    }
+    // Create two Hobbemouns with the same names
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      Hobbemoun h1 = new Hobbemoun(type1, type2, "Zapchu");
+      Hobbemoun h2 = new Hobbemoun(type1, type2, "Zapchu");
+      if ((h1.compareTo(h2) != 0)){
+        return false;
+      }
+    }
+    // Create two Hobbemouns with different names
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      Hobbemoun h1 = new Hobbemoun(type1, type2, "Lapchu");
+      Hobbemoun h2 = new Hobbemoun(type1, type2, "Zapchu");
+      if ((h1.compareTo(h2) > 1)){
+        return false;
+      }
+    }
+    return true;
   }
-
+  
+  /**
+   * Tests the compareTo method when comparing Hobbemouns with same type values and same names
+   *
+   * @return true if test passes, false otherwise
+   */
   public static boolean testCompareToSame() {
-    return false; // TODO: implement this test
-
+    // Create two Hobbemouns with the same primary types
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      Hobbemoun h1 = new Hobbemoun(type1, null, "Zapchu");
+      Hobbemoun h2 = new Hobbemoun(type1, null, "Zapchu");
+      if ((h1.compareTo(h2) != 0)){
+        return false;
+      }
+    }
+    // Create two Hobbemouns with different primary types
+    {
+      HobbemounType type1 = HobbemounType.NORMAL;
+      HobbemounType type2 = HobbemounType.WATER;
+      Hobbemoun h1 = new Hobbemoun(type1, type2, "Zapchu");
+      Hobbemoun h2 = new Hobbemoun(type1, type2, "Zapchu");
+      if ((h1.compareTo(h2) != 0)){
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
