@@ -21,7 +21,7 @@
 //////////////////////// ASSISTANCE/HELP CITATIONS ////////////////////////////
 //
 // Persons:         Mouna Kacem
-//                  (provided the HobbemounTree Template
+//                  (provided the HobbemounTree Template)
 //                  lecture slides showed how binary trees function
 // Online Sources:  GeeksforGeeks
 //                  - https://www.geeksforgeeks.org/introduction-to-binary-tree/
