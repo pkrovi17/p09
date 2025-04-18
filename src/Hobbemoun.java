@@ -1,10 +1,41 @@
-// TODO Add Complete File Header
+//////////////// FILE HEADER (INCLUDE IN EVERY FILE) //////////////////////////
+//
+// Title:    Hobbemoun comparable class
+// Course:   CS 300 Spring 2025
+//
+// Author:   Pranav Krovi
+// Email:    pkrovi@wisc.edu
+// Lecturer: Mouna Kacem
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+// 
+// Partner Name:    x
+// Partner Email:   x
+// Partner Lecturer's Name: x
+// 
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+//   x Write-up states that pair programming is allowed for this assignment.
+//   x We have both read and understand the course Pair Programming Policy.
+//   x We have registered our team prior to the team registration deadline.
+//
+//////////////////////// ASSISTANCE/HELP CITATIONS ////////////////////////////
+//
+// Persons:         Mouna Kacem
+//                  (provided the Hobbemoun class template)
+//                  (provided the HobbemounType class template) 
+//                  project descriptions described how enums work
+// Online Sources:  W3 Schools
+//                  - https://www.w3schools.com/java/java_enums.asp
+//                  - https://www.w3schools.com/java/ref_string_compareto.asp
+//
+///////////////////////////////////////////////////////////////////////////////
 
 /**
  * This class models the Hobbemoun data type.
  *
  */
-// public class Hobbemoun /* TODO add the required interface */ {
+// public class Hobbemoun 
+/* Comparable <Hobbemoun> so that it can compare with other hobbemoun instances*/
 public class Hobbemoun implements Comparable<Hobbemoun> {
   /**
    * The minimum ID number
@@ -164,6 +195,13 @@ public class Hobbemoun implements Comparable<Hobbemoun> {
    */
   @Override
   public int compareTo(Hobbemoun otherHobbemoun) {
+    // Cite: W3 Schools
+    // https://www.w3schools.com/java/ref_string_compareto.asp
+    // helped understand how the compare to method is supposed to work
+
+    // Cite: W3 Schools
+    // https://www.w3schools.com/java/java_enums.asp
+    // helped understand how enums work and how to translate them to integer values
     // Compare primary type values
     int thisPrimaryValue = this.PRIMARY_TYPE.getValue();
     int otherPrimaryValue = otherHobbemoun.getPrimaryType().getValue();

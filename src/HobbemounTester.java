@@ -1,4 +1,33 @@
-// TODO Add Complete File Header
+//////////////// FILE HEADER (INCLUDE IN EVERY FILE) //////////////////////////
+//
+// Title:    Hobbemoun Tester class
+// Course:   CS 300 Spring 2025
+//
+// Author:   Pranav Krovi
+// Email:    pkrovi@wisc.edu
+// Lecturer: Mouna Kacem
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+// 
+// Partner Name:    x
+// Partner Email:   x
+// Partner Lecturer's Name: x
+// 
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+//   x Write-up states that pair programming is allowed for this assignment.
+//   x We have both read and understand the course Pair Programming Policy.
+//   x We have registered our team prior to the team registration deadline.
+//
+//////////////////////// ASSISTANCE/HELP CITATIONS ////////////////////////////
+//
+// Persons:         Mouna Kacem
+//                  javadocs helped understand which methods to implement
+//                  project documentation helped know what methods do what function
+// Online Sources:  GeeksforGeeks
+//                  - https://www.geeksforgeeks.org/introduction-to-binary-tree/
+//                  - https://www.geeksforgeeks.org/implementing-a-binary-tree-in-java/
+//
+///////////////////////////////////////////////////////////////////////////////
 
 import java.util.NoSuchElementException;
 import java.util.Iterator;
@@ -167,6 +196,9 @@ public class HobbemounTester {
    * @return true if the test passes, false otherwise
    */
   public static boolean testIsValidBSTValid() {
+    // Cite: GeeksforGeeks
+    // https://www.geeksforgeeks.org/introduction-to-binary-tree/
+    // helped understand how to create a valid BST
     // Create a valid BST
     HobbemounTree tree = new HobbemounTree();
     HobbemounType type1 = HobbemounType.NORMAL;
@@ -199,6 +231,9 @@ public class HobbemounTester {
    * @return true if the test passes, false otherwise
    */
   public static boolean testIsValidBSTInvalid() {
+    // Cite: GeeksforGeeks
+    // https://www.geeksforgeeks.org/implementing-a-binary-tree-in-java/
+    // helped understand and implement/create an invalid bst
     // Create an invalid BST
     Hobbemoun rootData = new Hobbemoun(HobbemounType.NORMAL, null, "M");
     Hobbemoun leftData = new Hobbemoun(HobbemounType.NORMAL, null, "C");

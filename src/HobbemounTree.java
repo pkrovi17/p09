@@ -1,4 +1,33 @@
-// TODO Add a COMPLETE File Header Here
+//////////////// FILE HEADER (INCLUDE IN EVERY FILE) //////////////////////////
+//
+// Title:    Hobbemoun Binary Tree Implementation
+// Course:   CS 300 Spring 2025
+//
+// Author:   Pranav Krovi
+// Email:    pkrovi@wisc.edu
+// Lecturer: Mouna Kacem
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
+// 
+// Partner Name:    x
+// Partner Email:   x
+// Partner Lecturer's Name: x
+// 
+// VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
+//   x Write-up states that pair programming is allowed for this assignment.
+//   x We have both read and understand the course Pair Programming Policy.
+//   x We have registered our team prior to the team registration deadline.
+//
+//////////////////////// ASSISTANCE/HELP CITATIONS ////////////////////////////
+//
+// Persons:         Mouna Kacem
+//                  (provided the HobbemounTree Template
+//                  lecture slides showed how binary trees function
+// Online Sources:  GeeksforGeeks
+//                  - https://www.geeksforgeeks.org/introduction-to-binary-tree/
+//                  - https://www.geeksforgeeks.org/implementing-a-binary-tree-in-java/
+//
+///////////////////////////////////////////////////////////////////////////////
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -13,7 +42,8 @@ import java.util.NoSuchElementException;
  * You may NOT use any loops (for, while, etc) in this class. Recursive strategies only.
  *
  */
-// public class HobbemounTree /* TODO add the required interface */{
+// public class HobbemounTree 
+/* Iterable <Hobbemoun> so that we can iterate over elements of Hobbemoun type */
 public class HobbemounTree implements Iterable<Hobbemoun> {
 
   /**
@@ -130,6 +160,9 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if the subtree rooted at node is a valid BST, false otherwise
    */
   private static boolean isValidBSTHelper(Node<Hobbemoun> node, Hobbemoun min, Hobbemoun max) {
+    // Cite: GeeksforGeeks
+    // https://www.geeksforgeeks.org/introduction-to-binary-tree/
+    // helped understand how to check if a binary tree is a BST
     // Base case: empty tree
     if (node == null) return true;
     // Check if the current node's value is within the valid range
@@ -197,6 +230,9 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if the newHobbemoun is successfully added to this HobbemounTree, false otherwise.
    */
   private static boolean insertHelper(Hobbemoun newHobbemoun, Node<Hobbemoun> node) {
+    // Cite: GeeksforGeeks
+    // https://www.geeksforgeeks.org/implementing-a-binary-tree-in-java/
+    // helped understand how to implement a binary tree in Java
     int cmp = newHobbemoun.compareTo(node.getData());
     if (cmp == 0) {
       return false; // Duplicate Hobbemoun, do not insert
@@ -246,6 +282,9 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return a reference to the matching Hobbemoun if found, null otherwise.
    */
   private static Hobbemoun lookupHelper(Hobbemoun toFind, Node<Hobbemoun> node) {
+    // Cite: GeeksforGeeks
+    // https://www.geeksforgeeks.org/implementing-a-binary-tree-in-java/
+    // helped understand how to implement a binary tree in Java
     if (node == null) {
       return null; // Base case: empty tree
     }
@@ -392,6 +431,10 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
     // Recursive case: target is greater than current node
     // Successor must be in right subtree (if it exists)
     // Keep the same potential successor
+
+    // Cite: GeeksforGeeks
+    // https://www.geeksforgeeks.org/implementing-a-binary-tree-in-java/
+    // helped understand how to implement a binary tree in Java
     if (node == null) {
       return null; // Base case: empty tree
     }
