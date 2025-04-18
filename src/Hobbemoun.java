@@ -164,29 +164,26 @@ public class Hobbemoun implements Comparable<Hobbemoun> {
    */
   @Override
   public int compareTo(Hobbemoun otherHobbemoun) {
-    // Compare primary types
-    HobbemounType thisPrimaryType = this.PRIMARY_TYPE;
-    HobbemounType otherPrimaryType = otherHobbemoun.getPrimaryType();
-    // Compare primary types
-    int primaryTypeComparison = thisPrimaryType.compareTo(otherPrimaryType);
-    if (primaryTypeComparison != 0) {
-      return primaryTypeComparison;
+    // Compare primary type values
+    int thisPrimaryValue = this.PRIMARY_TYPE.getValue();
+    int otherPrimaryValue = otherHobbemoun.getPrimaryType().getValue();
+    if (thisPrimaryValue != otherPrimaryValue) {
+      return Integer.compare(thisPrimaryValue, otherPrimaryValue);
     }
-    // Compare secondary types if both have one
-    HobbemounType thisSecondaryType = this.SECONDARY_TYPE;
-    HobbemounType otherSecondaryType = otherHobbemoun.getSecondaryType();
-    if (thisSecondaryType != null && otherSecondaryType != null) {
-      int secondaryTypeComparison = thisSecondaryType.compareTo(otherSecondaryType);
-      if (secondaryTypeComparison != 0) {
-        return secondaryTypeComparison;
+    // Compare secondary type values if both are non-null
+    if (this.SECONDARY_TYPE != null && otherHobbemoun.getSecondaryType() != null) {
+      int thisSecondaryValue = this.SECONDARY_TYPE.getValue();
+      int otherSecondaryValue = otherHobbemoun.getSecondaryType().getValue();
+      if (thisSecondaryValue != otherSecondaryValue) {
+        return Integer.compare(thisSecondaryValue, otherSecondaryValue);
       }
     }
-    // Compare names
+    // Compare names alphabetically
     int nameComparison = this.NAME.compareTo(otherHobbemoun.getName());
     if (nameComparison != 0) {
       return nameComparison;
     }
-    // If all comparisons are equal, return 0 
+    // 4. Everything matches
     return 0;
   }
 

@@ -30,7 +30,8 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * Constructor for HobbemounTree. Should set size to 0 and root to null.
    */
   public HobbemounTree() {
-    // TODO: implement this constructor
+    this.root = null;
+    this.size = 0;
   }
 
   /**
@@ -45,7 +46,12 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @throws IllegalArgumentException if the input root is not the root of a valid BST
    */
   public HobbemounTree(Node<Hobbemoun> root) {
-    // TODO: implement this constructor
+    if (!isValidBST(root)) {
+      throw new IllegalArgumentException("The input root is not the root of a valid BST");
+    } else {
+      this.root = root;
+      this.size = countNodes(root);
+    }
   }
 
 
@@ -56,8 +62,12 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the number of nodes in the tree
    */
   private int countNodes(Node<Hobbemoun> node) {
-    // TODO: implement this method
-    return 0;
+    // Base case: empty tree
+    if (node == null) {
+      return 0;
+    }
+    // Recursive case: count the current node and recurse on left and right subtrees
+    return 1 + countNodes(node.getLeft()) + countNodes(node.getRight());
   }
 
   /**
@@ -103,7 +113,7 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if the binary tree is a valid binary search tree, false otherwise
    */
   public static boolean isValidBST(Node<Hobbemoun> node) {
-    return false; // TODO: implement this method
+    return isValidBSTHelper(node, null, null);
   }
 
 
@@ -120,8 +130,17 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if the subtree rooted at node is a valid BST, false otherwise
    */
   private static boolean isValidBSTHelper(Node<Hobbemoun> node, Hobbemoun min, Hobbemoun max) {
-    // TODO: implement this method
-    return false;
+    // Base case: empty tree
+    if (node == null) return true;
+    // Check if the current node's value is within the valid range
+    // Compare the current node's value with min and max
+    Hobbemoun value = node.getData();
+    if ((min != null && value.compareTo(min) <= 0) ||
+        (max != null && value.compareTo(max) >= 0)) {
+      return false;
+    }
+    // Recursively check the left and right subtrees with updated min and max values
+    return isValidBSTHelper(node.getLeft(), min, value) && isValidBSTHelper(node.getRight(), value, max);
   }
 
   /**
@@ -130,8 +149,7 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if this tree is empty, false otherwise
    */
   public boolean isEmpty() {
-    // TODO: implement this method
-    return false;
+    return size == 0;
   }
 
   /**
@@ -140,8 +158,7 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the total number of Hobbemouns stored in this tree
    */
   public int size() {
-    // TODO: implement this method
-    return 0;
+    return size;
   }
 
   /**
@@ -154,7 +171,19 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if the newHobbemoun is successfully added to this HobbemounTree, false otherwise.
    */
   public boolean insert(Hobbemoun newHobbemoun) {
-    return false; // TODO: implement this method
+    if (newHobbemoun == null) {
+      throw new IllegalArgumentException("Hobbemoun cannot be null");
+    }
+    if (root == null) {
+      root = new Node<>(newHobbemoun);
+      size++;
+      return true;
+    } 
+    boolean inserted = insertHelper(newHobbemoun, root);
+    if (inserted) {
+      size++;
+    }
+    return inserted;
   }
 
   /**
@@ -168,10 +197,25 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return true if the newHobbemoun is successfully added to this HobbemounTree, false otherwise.
    */
   private static boolean insertHelper(Hobbemoun newHobbemoun, Node<Hobbemoun> node) {
-    return false; // TODO: implement this method
-  }
-
-
+    int cmp = newHobbemoun.compareTo(node.getData());
+    if (cmp == 0) {
+      return false; // Duplicate Hobbemoun, do not insert
+    } else if (cmp < 0) {
+      if (node.getLeft() == null) {
+        node.setLeft(new Node<>(newHobbemoun));
+        return true; // Inserted as left child
+      } else {
+        return insertHelper(newHobbemoun, node.getLeft()); // Recur left
+      }
+    } else {
+        if (node.getRight() == null) {
+              node.setRight(new Node<>(newHobbemoun));
+              return true; // Inserted as right child
+            } else {
+              return insertHelper(newHobbemoun, node.getRight()); // Recur right
+            }
+          }
+    }
 
   /**
    * MUST BE IMPLEMENTED RECURSIVELY - NO LOOPS
@@ -183,7 +227,11 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the matching Hobbemoun if match found, null otherwise.
    */
   public Hobbemoun lookup(int firstId, int secondId) {
-    return null; // TODO: implement this method
+    Hobbemoun toFind = new Hobbemoun(firstId, secondId);
+    if (root == null) {
+      return null; // Tree is empty
+    }
+    return lookupHelper(toFind, root);
   }
 
   /**
@@ -198,7 +246,17 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return a reference to the matching Hobbemoun if found, null otherwise.
    */
   private static Hobbemoun lookupHelper(Hobbemoun toFind, Node<Hobbemoun> node) {
-    return null; // TODO: implement this method
+    if (node == null) {
+      return null; // Base case: empty tree
+    }
+    int cmp = toFind.compareTo(node.getData());
+    if (cmp == 0) {
+      return node.getData(); // Found the matching Hobbemoun
+    } else if (cmp < 0) {
+      return lookupHelper(toFind, node.getLeft()); // Search in left subtree
+    } else {
+      return lookupHelper(toFind, node.getRight()); // Search in right subtree
+    }
   }
 
   /**
@@ -210,7 +268,7 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the height of this Binary Search Tree
    */
   public int height() {
-    return 0; // TODO: implement this method
+    return heightHelper(root);
   }
 
   /**
@@ -223,7 +281,13 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return height of the subtree rooted at node
    */
   private static int heightHelper(Node<Hobbemoun> node) {
-    return 0; // TODO: implement this method
+    if (node == null) {
+      return 0; // Base case: empty tree
+    }
+    // Recursive case: height is 1 + max height of left and right subtrees
+    int leftHeight = heightHelper(node.getLeft());
+    int rightHeight = heightHelper(node.getRight());
+    return 1 + Math.max(leftHeight, rightHeight);
   }
 
   /**
@@ -236,7 +300,10 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the first element in the increasing order of this BST, and null if the tree is empty.
    */
   public Hobbemoun getWeakest() {
-    return null; // TODO: implement this method
+    if (root == null) {
+      return null; // Tree is empty
+    }
+    return getLeftmostHelper(root).getData(); // Get the leftmost node's data
   }
 
   /**
@@ -248,7 +315,10 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the minimum element in the increasing order from the node <b>root</b>
    */
   private static Node<Hobbemoun> getLeftmostHelper(Node<Hobbemoun> root) {
-    return null; // TODO: implement this method
+    if (root.getLeft() == null) {
+      return root; // Base case: leftmost node found
+    }
+    return getLeftmostHelper(root.getLeft()); // Recur left
   }
 
   /**
@@ -261,7 +331,10 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the last element in the increasing order of this BST, and null if the tree is empty.
    */
   public Hobbemoun getStrongest() {
-    return null; // TODO: implement this method
+    if (root == null) {
+      return null; // Tree is empty
+    }
+    return getRightmostHelper(root).getData(); // Get the rightmost node's data
   }
 
   /**
@@ -271,9 +344,11 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @return the maximum element in the increasing order from the node <b>root</b>
    */
   private static Node<Hobbemoun> getRightmostHelper(Node<Hobbemoun> root) {
-    return null; // TODO: implement this method
+    if (root.getRight() == null) {
+      return root; // Base case: rightmost node found
+    }
+    return getRightmostHelper(root.getRight()); // Recur right
   }
-
 
   /**
    * MUST BE IMPLEMENTED RECURSIVELY - NO LOOPS
@@ -287,7 +362,10 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    * @throws IllegalArgumentException with a descriptive error message if <b>hobbemoun</b> is null
    */
   public Hobbemoun next(Hobbemoun hobbemoun) {
-    return null; // TODO: implement this method
+    if (hobbemoun == null) {
+      throw new IllegalArgumentException("Hobbemoun cannot be null");
+    }
+    return nextHelper(hobbemoun, root,null);
   }
 
   /**
@@ -305,20 +383,35 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
   private static Hobbemoun nextHelper(Hobbemoun hobbemoun, Node<Hobbemoun> node,
       Node<Hobbemoun> next) {
     // Base case: node is null
-
     // Base case: We found the node that matches the target Hobbemoun
     // If node has a right subtree, the successor is the leftmost node in that subtree
     // If no right subtree, the successor is the saved potential successor (if any)
-
     // Recursive case: target is less than current node
     // The current node might be the successor
     // Search in left subtree, set the current node as potential successor
-
     // Recursive case: target is greater than current node
     // Successor must be in right subtree (if it exists)
     // Keep the same potential successor
-
-    return null; // TODO Implement this method
+    if (node == null) {
+      return null; // Base case: empty tree
+    }
+    int cmp = hobbemoun.compareTo(node.getData());
+    if (cmp == 0) {
+      // Match Found
+      if (node.getRight() != null) {
+        // Go right and find leftmost node
+        return getLeftmostHelper(node.getRight()).getData();
+      } else {
+        // No right Child
+        return next == null ? null : next.getData();
+      }
+    } else if (cmp < 0) {
+      // Target is smaller
+      return nextHelper(hobbemoun , node.getLeft(), node);
+    } else {
+      // Target is larger
+      return nextHelper(hobbemoun, node.getRight(), next);
+    }
   }
 
   /**
@@ -327,9 +420,9 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    *
    * @return an HobbemounIterator over the Hobbemoun objects in this HobbemounTree
    */
+  @Override
   public Iterator<Hobbemoun> iterator() {
-    // TODO Add @Override annotation above the signature of this method
-    return null; // TODO: implement this method
+    return new HobbemounIterator(this);
   }
 
   /**
@@ -348,8 +441,14 @@ public class HobbemounTree implements Iterable<Hobbemoun> {
    */
   @Override
   public String toString() {
-    // TODO: implement this method
-    return null;
+    StringBuilder sb = new StringBuilder();
+    for (Hobbemoun h : this) {
+      sb.append(h.toString()).append("\n");
+    }
+    if (sb.length() == 0) {
+      return ""; // Empty tree
+    }
+    return sb.toString().trim(); // Remove trailing newline
   }
 
   /**
